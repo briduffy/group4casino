@@ -10,6 +10,7 @@
 # prompt do you wish to go again? Y/N
 # If "Y" loop
 # If "N" exit
+#place bet then tell what current wallet
 
 class GuessingGame
 
@@ -29,7 +30,7 @@ class GuessingGame
     when 1
       play_game
     when 2
-      view_wallet
+      wallet_total
     when 3
       exit
     else
@@ -39,10 +40,10 @@ class GuessingGame
 
   def play_game
     puts "==============================="
-    puts "$ Place Your Bet $"
-    player_bet 
-    puts "Enter a Number Between 1 and 6"
-    player_choice =""
+    puts "$$$$$ Place Your Bet $$$$$"
+    bet 
+    puts "Enter a Number Between 1 and 6 to double your bet"
+    player_choice
     puts "Press Enter to Roll Dice"
     gets
     roll
@@ -64,26 +65,40 @@ class GuessingGame
 
   def show_dice
     puts "You rolled a #{@die1} "
+    if @die == player_choice
+      puts "$$$$$$ You Won! $$$$$$"
+      puts "#{@player_bet} Added to Wallet"
+    else
+      puts "#{@player_bet} Removed form Wallet"
+      game_menu 
+    end
   end
 
-  def player_bet
-    player_bet = gets.to_i
+  def bet 
+    @player_bet = gets.to_i
   end
 
   def player_choice
     player_choice = gets.to_i
-    if @dice = player_choice
-      initialize
-    else
-      puts "Invalid Number"
-    end 
+    # if @dice = player_choice
+    #   initialize
+    # else
+    #   puts "Invalid Number"
+    # end 
 
   end
 
-  def view_wallet
+  def wallet_total
+    #make chips instance variable so it can iteract outside of method
     chips = 20
+    puts "==============================="
     puts "You have #{chips} chips"
+    game_menu 
   end
+
+  # def wallet_total
+    
+  # end
 
 end
 
