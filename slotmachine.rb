@@ -24,10 +24,10 @@ end
 
 def menu
   puts
-  puts "==========================================".colorize(:cyan)
-  puts "      Welcome to the slot machine!        ".colorize(:yellow)
-  puts "==========================================".colorize(:cyan)
-  puts "        Choose an option below.           "
+  puts "=======================================================".colorize(:cyan)
+  puts "              Welcome to the slot machine!             ".colorize(:yellow)
+  puts "=======================================================".colorize(:cyan)
+  puts "                 Choose an option below.               "
   puts " 1) Play."
   puts " 2) See balance."
   puts " 3) Quit."
@@ -131,4 +131,4 @@ def money_maker(symbols)
   return num_of_matches
 end
 
-SlotGame.new
+# SlotGame.new
