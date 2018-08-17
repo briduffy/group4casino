@@ -70,9 +70,15 @@ class Deck
     else
         card_deal
     end
+    user_selection
   end
 
   def user_selection
+    puts 'What would you like to do with your hand?
+        1) Hit
+        2) Stay
+        3) Split
+        4) Double Down'
     choice = gets.to_i
     case choice
     when 1
@@ -94,5 +100,5 @@ end
 end
 
 d = Deck.new
-puts d.results
+#puts d.results
 #puts d.cards
