@@ -45,26 +45,46 @@ class Deck
     puts "Dealer Cards :
     #{random_card3.rank} of #{random_card3.suit} (#{random_card3.color})
     #{random_card4.rank} of #{random_card4.suit} (#{random_card4.color})"
-    num1 = (random_card3.rank == 'J' || random_card3.rank == 'Q' || random_card3.rank == 'K') ? 10 : random_card3.rank
-    num2 = (num1 == 'A') ? 1 : num1
-    num3 = (random_card4.rank == 'J' || random_card4.rank == 'Q' || random_card4.rank == 'K') ? 10 : random_card4.rank
-    num4 = (num3 == 'A') ? 1 : num3
-    puts num2.to_i + num4.to_i
-    puts
+    dealer_face_card1 = (random_card3.rank == 'J' || random_card3.rank == 'Q' || random_card3.rank == 'K') ? 10 : random_card3.rank
+    @dealer_card1 = (dealer_face_card1 == 'A') ? 1 : dealer_face_card1
+    dealer_face_card2 = (random_card4.rank == 'J' || random_card4.rank == 'Q' || random_card4.rank == 'K') ? 10 : random_card4.rank
+    @dealer_card2 = (dealer_face_card2 == 'A') ? 1 : dealer_face_card2
+    if @dealer_card1.to_i != @dealer_card2.to_i
+        @dealer_total = @dealer_card1.to_i + @dealer_card2.to_i
+        puts @dealer_total
+        puts
+    else
+        card_deal
+    end
     puts "Your cards : 
     #{random_card.rank} of #{random_card.suit} (#{random_card.color})
     #{random_card2.rank} of #{random_card2.suit} (#{random_card2.color})"
-    num1 = (random_card.rank == 'J' || random_card.rank == 'Q' || random_card.rank == 'K') ? 10 : random_card.rank
-    @num2 = (num1 == 'A') ? 1 : num1
-    num3 = (random_card2.rank == 'J' || random_card2.rank == 'Q' || random_card2.rank == 'K') ? 10 : random_card2.rank
-    @num4 = (num3 == 'A') ? 1 : num3
-    puts @num2.to_i + @num4.to_i
+    user_face_card1 = (random_card.rank == 'J' || random_card.rank == 'Q' || random_card.rank == 'K') ? 10 : random_card.rank
+    @user_card1= (user_face_card1 == 'A') ? 1 : user_face_card1
+    user_face_card2 = (random_card2.rank == 'J' || random_card2.rank == 'Q' || random_card2.rank == 'K') ? 10 : random_card2.rank
+    @user_card2 = (user_face_card2 == 'A') ? 1 : user_face_card2
+    if @user_card1.to_i != @user_card2.to_i
+        @user_total = @user_card1.to_i + @user_card2.to_i
+        puts @user_total
+        puts
+    else
+        card_deal
+    end
   end
 
+  def user_selection
+    choice = gets.to_i
+    case choice
+    when 1
+        puts "You hit"
+    end
+end
+
+
   def results
-    if @num2 > @num4
+    if @dealer_total > @user_total
         puts "Sorry you lose!"
-    elsif @num2 == @num4
+    elsif @dealer_total == @user_total
         puts "It is a draw"
     else
         puts "You win!"
