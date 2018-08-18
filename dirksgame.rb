@@ -8,8 +8,9 @@
 @user_guess = [] 
 @actual = []
 @answers = 0
+@wallet = 100
 def menu
-  puts "Welcome to Bingo." 
+  puts "Welcome to the Lottery." 
   puts "Pick 10 Numbers between 1 and 100."
   end
 
@@ -52,6 +53,7 @@ end
 # end
  
 def different
+  
   rr = @answers
   a = @user_guess[0]
    @actual.each do |next_num|
@@ -124,11 +126,35 @@ def different
       rr += 1
     end
   end 
+  
   puts "You got #{rr} right" 
+  @answers += rr
 end
 
-
-
+def money
+  ee = 100
+  tt =
+  
+  case @answers
+  when @answers == 0
+  ee = ee - 10
+  when @answers < 5
+  ee = ee - 5
+  when @answers == 5
+  ee = ee * 1.5
+  when @answers == 6
+  @wallet * 2
+  when @answers == 7
+  @wallet * 2.5
+  when @answers == 8
+  @wallet * 3
+  when @answers == 9
+  @wallet * 3.5
+  when @answers == 10
+  @wallet * 6
+end
+@wallet = ee
+end
   
   
   
@@ -138,15 +164,22 @@ end
   
   
   
-  
+while true
   menu
   num_guess
   computer
   sort
   different
+  #money
+  puts "You now have #{@wallet}"
   print @user_guess
   puts ' '
   print @actual
+  puts ' '
+  puts
+  @user_guess.clear
+  @actual.clear
+end
 
 
   
