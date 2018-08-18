@@ -1,16 +1,3 @@
-# greeting "welcome to geoffs guessing game" prompt "you have this much money"
-# prompt saying you have this much money
-# prompt saying how much you want to bet
-# guess a number between 1 and 6
-# put dice rolling.....
-# if guess number = dice number puts "you won!"
-# if guess number is != dice number put "you lost"
-# subtract bet from wallet
-# display new amount of money
-# prompt do you wish to go again? Y/N
-# If "Y" loop
-# If "N" exit
-#place bet then tell what current wallet
 
 class GuessingGame
 
@@ -19,10 +6,10 @@ class GuessingGame
     puts "Welcome to Geoffs Game of Chance"
     puts "==============================="
     puts "1) Play Game"
-    puts "2) View Wallet"
-    puts "3) Exit"
+    puts "2) Exit"
     puts "==============================="
     game_options
+    
   end
 
   def game_options
@@ -30,11 +17,10 @@ class GuessingGame
     when 1
       play_game
     when 2
-      wallet_total
-    when 3
       exit
     else
       puts "Invalid Option"
+      game_menu
     end
   end
 
@@ -47,31 +33,27 @@ class GuessingGame
     puts "Press Enter to Roll Dice"
     gets
     roll
-    #initialize 
-    #user_bet = gets.to_1
-    #place bet
-    #enter a number and roll the dice
-    #you rolled a 6
-    #you win you lose
+    show_dice
   end
-
-  # def initialize
-  #   roll
-  # end
 
   def roll
     @die1 = 1 + rand(6)
   end
 
   def show_dice
+    @chips = 20
     puts "You rolled a #{@die1} "
-    if @die == player_choice
+    if @die1 == @player_number
       puts "$$$$$$ You Won! $$$$$$"
-      puts "#{@player_bet} Added to Wallet"
+      puts "#{wallet_total}chips added to Wallet" 
+      #game_menu
     else
-      puts "#{@player_bet} Removed form Wallet"
-      game_menu 
+      puts "You Lose"
+      puts "You have #{wallet_total} chips remaining" 
+      #game_menu 
     end
+    game_menu
+    wallet_total 
   end
 
   def bet 
@@ -79,31 +61,31 @@ class GuessingGame
   end
 
   def player_choice
-    player_choice = gets.to_i
-    # if @dice = player_choice
-    #   initialize
-    # else
-    #   puts "Invalid Number"
-    # end 
+    @player_number = gets.to_i
 
   end
 
   def wallet_total
-    #make chips instance variable so it can iteract outside of method
-    chips = 20
+    @chips = 20
+    if @die1 == @player_number
+      @chips = @player_bet + @player_bet + @chips
+    else
+     @chips = @chips - @player_bet
+    end
     puts "==============================="
-    puts "You have #{chips} chips"
+    puts "You have #{@chips} chips"
     game_menu 
   end
-
-  # def wallet_total
-    
-  # end
-
+  
 end
 
 g = GuessingGame.new
 
 g.game_menu
-g.show_dice
-g.player_choice
+# g.show_dice
+#g.player_choice
+
+
+# def method(total)
+#   case total
+#end
