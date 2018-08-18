@@ -131,30 +131,30 @@ def different
   @answers += rr
 end
 
-def money
-  ee = 100
-  tt =
+# def money
+#   ee = 100
+#   tt =
   
-  case @answers
-  when @answers == 0
-  ee = ee - 10
-  when @answers < 5
-  ee = ee - 5
-  when @answers == 5
-  ee = ee * 1.5
-  when @answers == 6
-  @wallet * 2
-  when @answers == 7
-  @wallet * 2.5
-  when @answers == 8
-  @wallet * 3
-  when @answers == 9
-  @wallet * 3.5
-  when @answers == 10
-  @wallet * 6
-end
-@wallet = ee
-end
+#   case @answers
+#   when @answers == 0
+#   ee = ee - 10
+#   when @answers < 5
+#   ee = ee - 5
+#   when @answers == 5
+#   ee = ee * 1.5
+#   when @answers == 6
+#   @wallet * 2
+#   when @answers == 7
+#   @wallet * 2.5
+#   when @answers == 8
+#   @wallet * 3
+#   when @answers == 9
+#   @wallet * 3.5
+#   when @answers == 10
+#   @wallet * 6
+# end
+# @wallet = ee
+# end
   
   
   
