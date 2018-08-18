@@ -2,8 +2,7 @@
 #have user select  10 numbers (1..100) with a buy-in 
 #have computer ganerate 10 random numbers (1..100)
 #compare the user's numbers with the computers numbers
-#if user gets one number correct then play 1/5 of what they put in and so on
-# if user gets five numbers correct then play users all what they put in. More numbers user pays in + numbers got right/5 of what they paid in
+#adjust wallet to the winnings or losings
 
 @user_guess = [] 
 @actual = []
@@ -126,52 +125,70 @@ def different
       rr += 1
     end
   end 
-  
   puts "You got #{rr} right" 
   @answers += rr
 end
 
-# def money
-#   ee = 100
-#   tt =
+def money
+  ee = @wallet
+  rr = @answers
   
-#   case @answers
-#   when @answers == 0
-#   ee = ee - 10
-#   when @answers < 5
-#   ee = ee - 5
-#   when @answers == 5
-#   ee = ee * 1.5
-#   when @answers == 6
-#   @wallet * 2
-#   when @answers == 7
-#   @wallet * 2.5
-#   when @answers == 8
-#   @wallet * 3
-#   when @answers == 9
-#   @wallet * 3.5
-#   when @answers == 10
-#   @wallet * 6
-# end
-# @wallet = ee
-# end
+
+case rr
+when 0
+ee = ee - 10
+when 5
+ee = ee * 1.5
+when 6
+ee = ee * 2
+when 7
+ee = ee * 2.5
+when 8
+ee = ee * 3
+when 9
+ee = ee * 3.5
+when 10
+ee = ee * 6
+else
+ee = ee - 5
+
+end
   
-  
-  
-  
-  
-  
+@wallet = ee
+
+end
   
   
   
-while true
+menu
+puts "You have $#{@wallet}" 
+num_guess
+computer
+sort
+different
+money
+puts "You now have $#{@wallet}"
+print @user_guess
+puts ' '
+print @actual
+puts ' '
+puts
+@user_guess.clear
+@actual.clear 
+  
+  
+  
+
+
+
+  while true
   menu
   num_guess
   computer
   sort
   different
-  #money
-  puts "You now have #{@wallet}"
+  money
+  puts "You now have $#{@wallet}"
   print @user_guess
   puts ' '
   print @actual
