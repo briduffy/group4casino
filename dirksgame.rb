@@ -4,6 +4,10 @@
 #compare the user's numbers with the computers numbers
 #adjust wallet to the winnings or losings
 
+
+
+
+
 @user_guess = [] 
 @actual = []
 @answers = 0
@@ -23,7 +27,7 @@ def num_guess
   
   end
 end
-#To compare arrays
+
 def computer
   for x in 1..10
     if x > 10 then 
@@ -161,8 +165,8 @@ end
   
   
 menu
-puts "You have $#{@wallet}" 
 num_guess
+puts "You have $#{@wallet}" 
 computer
 sort
 different
@@ -175,6 +179,7 @@ puts ' '
 puts
 @user_guess.clear
 @actual.clear 
+@answers = 0
   
   
   
@@ -196,6 +201,7 @@ puts
   puts
   @user_guess.clear
   @actual.clear
+  @answers = 0
 end
 
 
