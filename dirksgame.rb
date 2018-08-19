@@ -4,20 +4,30 @@
 #compare the user's numbers with the computers numbers
 #adjust wallet to the winnings or losings
 
+class DirksGame
+  attr_accessor :user_guess, :actual, :answers, :wallet
+  
+  user_guess = [] 
+  actual = []
+  answers = 0
+  wallet = 100
+  
+  def initialize(user_guess, actual, answers, wallet)
+    user_guess = @user_guess
+    actual = @actual
+    answers = @answers
+    wallet = @wallet
+    @wallet = 100
+    
+end
 
-
-
-
-@user_guess = [] 
-@actual = []
-@answers = 0
-@wallet = 100
 def menu
   puts "Welcome to the Lottery." 
   puts "Pick 10 Numbers between 1 and 100."
   end
 
 def num_guess
+  @user_guess = []
   for x in 1..10
     if x > 10 then 
       next
@@ -29,6 +39,7 @@ def num_guess
 end
 
 def computer
+  @actual = []
   for x in 1..10
     if x > 10 then 
       next
@@ -56,6 +67,7 @@ end
 # end
  
 def different
+  @answers = 0
   
   rr = @answers
   a = @user_guess[0]
@@ -134,6 +146,7 @@ def different
 end
 
 def money
+  
   ee = @wallet
   rr = @answers
   
@@ -161,25 +174,40 @@ end
 @wallet = ee
 
 end
+def counter
+  puts "You now have #{@wallet}"
   
-  
-  
-menu
-num_guess
-puts "You have $#{@wallet}" 
-computer
-sort
-different
-money
-puts "You now have $#{@wallet}"
+end 
+def ending
 print @user_guess
 puts ' '
 print @actual
 puts ' '
 puts
-@user_guess.clear
-@actual.clear 
-@answers = 0
+
+end
+end
+
+game = DirksGame.new(@user_guess, @actual, @wallet, @answers)
+
+
+game.menu
+puts "You have $100" 
+game.num_guess
+game.computer
+game.sort
+game.different
+game.money
+game.counter
+game.ending
+# print @user_guess
+# puts ' '
+# print @actual
+# puts ' '
+# puts
+# @user_guess.clear
+# @actual.clear 
+# @answers = 0
   
   
   
@@ -187,21 +215,23 @@ puts
 
 
   while true
-  menu
-  num_guess
-  computer
-  sort
-  different
-  money
-  puts "You now have $#{@wallet}"
-  print @user_guess
-  puts ' '
-  print @actual
-  puts ' '
-  puts
-  @user_guess.clear
-  @actual.clear
-  @answers = 0
+  game.menu
+  game.num_guess
+  game.computer
+  game.sort
+  game.different
+  game.money
+  game.counter
+  game.ending
+  # puts "You now have $#{@wallet}"
+  # print @user_guess
+  # puts ' '
+  # print @actual
+  # puts ' '
+  # puts
+  # @user_guess.clear
+  # @actual.clear
+  # @answers = 0
 end
 
 
