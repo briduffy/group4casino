@@ -20,6 +20,7 @@ class Deck
     @suits = %w(Spades Diamonds Clubs Hearts)
     @cards = []
     @card_array = []
+    @card_array_dealer = []
     generate_deck
   end
 
@@ -76,7 +77,6 @@ class Deck
   end
 
   def user_hit_total
-    # @card_array = []
     @card_array << @user_hit_card.to_i
     total = 0
     @card_array.each do |num|
@@ -86,6 +86,40 @@ class Deck
     @new_total = total + @user_total.to_i
     puts @new_total
     card_hand_menu
+  end
+
+  def dealer_hit_total
+    @card_array_dealer << @dealer_hit_card.to_i
+    total2 = 0
+    @card_array_dealer.each do |num2|
+        total2 += num2
+    end  
+    puts 'Dealer total is now:' 
+    @new_dealer_total = total2 + @dealer_total.to_i
+    puts @new_dealer_total
+    if @new_dealer_total < 17 
+        dealer_hit
+    elsif @new_dealer_total <= 21
+        puts @new_dealer_total
+        comparison
+    else
+        puts "Dealer Bust!"
+        puts "You won!"
+        result_menu
+    end
+  end
+
+  def comparison
+    if @new_total || @user_total > @new_dealer_total
+        puts "You Win!"
+        result_menu
+    elsif @new_total || @user_total < @new_dealer_total
+        puts "You lose"
+        result_menu
+    else
+        puts "Its a push!"
+        result_menu
+    end
   end
 
   def user_hit
@@ -100,30 +134,50 @@ class Deck
     end
   end
 
-  def user_hit2
-    hit_card = @shuffle.sample
-    puts "Your hit card #{hit_card2.rank} #{hit_card2.suit} #{hit_card2.color}"
-    user_hit2 = (hit_card2.rank == 'J' || hit_card2.rank == 'Q' || hit_card2.rank == 'K') ? 10 : hit_card2.rank
-    @user_hit_card2 = (user_hit2 == 'A') ? 1 : user_hit2
-    if @user_hit_card2 != @user_card1 && @user_card2 && @dealer_card1 && @dealer_card2 && @user_hit_card
-        user_hit_total
-        user_selection
+
+  def dealer_hit
+    if @card_array != []
+        hit_card = @shuffle.sample
+        puts "Dealer hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
+        dealer_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
+        @dealer_hit_card = (dealer_hit1 == 'A') ? 1 : dealer_hit1
+        if @dealer_hit_card != @user_card1 && @user_card2 && @dealer_card1 && @dealer_card2 && @user_hit_card
+            dealer_hit_total
+        else
+            dealer_hit
+        end
     else
-        user_hit
+        hit_card = @shuffle.sample
+        puts "Dealer hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
+        dealer_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
+        @dealer_hit_card = (dealer_hit1 == 'A') ? 1 : dealer_hit1
+        if @dealer_hit_card != @user_card1 && @user_card2 && @dealer_card1 && @dealer_card2 
+            dealer_hit_total
+        else
+            dealer_hit
+        end
     end
   end
 
   def card_hand_menu
+    if @new_total <= 21
     puts 'What would you like to do with your hand now?
         1) Hit again
         2) Stay'
         choice = gets.to_i
         case choice
-        when 1
+        when 1 
             user_hit
+        when 2
+            puts 'You stayed'
+            dealer_hit
         else
-            puts 'Invalid Selection'
+            puts 'Invalid Choice'
         end
+    else
+        puts "You Bust!"
+        result_menu
+    end
   end
 
   def user_selection
@@ -139,7 +193,22 @@ class Deck
     when 1
         puts "You hit"
         user_hit
+    when 2
+        dealer_hit
     when 3
+        exit
+    end
+    end
+
+def result_menu
+    puts 'What would you like to do with your hand?
+        1) Play Again?
+        2) Exit'
+        choice =gets.to_i
+        case choice
+    when 1
+        d = Deck.new
+    when 2
         exit
     end
 end
