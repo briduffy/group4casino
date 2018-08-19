@@ -186,6 +186,35 @@ puts ' '
 puts
 
 end
+def leaving
+  puts "Would you like to leave yes or no"
+  if gets.to_s.strip.downcase == "yes"
+    require_relative 'maincasino'
+  else
+    while true
+      game = DirksGame.new(@user_guess, @actual, @wallet, @answers)
+      game.menu
+      game.num_guess
+      game.computer
+      game.sort
+      game.different
+      game.money
+      game.counter
+      game.ending
+      game.leaving
+      # puts "You now have $#{@wallet}"
+      # print @user_guess
+      # puts ' '
+      # print @actual
+      # puts ' '
+      # puts
+      # @user_guess.clear
+      # @actual.clear
+      # @answers = 0
+    end
+  
+  end
+end
 end
 
 game = DirksGame.new(@user_guess, @actual, @wallet, @answers)
@@ -200,6 +229,7 @@ game.different
 game.money
 game.counter
 game.ending
+game.leaving
 # print @user_guess
 # puts ' '
 # print @actual
@@ -214,25 +244,25 @@ game.ending
 
 
 
-  while true
-  game.menu
-  game.num_guess
-  game.computer
-  game.sort
-  game.different
-  game.money
-  game.counter
-  game.ending
-  # puts "You now have $#{@wallet}"
-  # print @user_guess
-  # puts ' '
-  # print @actual
-  # puts ' '
-  # puts
-  # @user_guess.clear
-  # @actual.clear
-  # @answers = 0
-end
+#   while true
+#   game.menu
+#   game.num_guess
+#   game.computer
+#   game.sort
+#   game.different
+#   game.money
+#   game.counter
+#   game.ending
+#   # puts "You now have $#{@wallet}"
+#   # print @user_guess
+#   # puts ' '
+#   # print @actual
+#   # puts ' '
+#   # puts
+#   # @user_guess.clear
+#   # @actual.clear
+#   # @answers = 0
+# end
 
 
   
