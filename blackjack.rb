@@ -39,6 +39,7 @@ class Deck
     card_deal
   end
 
+
   def card_deal
     random_card = @shuffle.sample
     random_card2 = @shuffle.sample
@@ -51,7 +52,7 @@ class Deck
     @dealer_card1 = (dealer_face_card1 == 'A') ? 1 : dealer_face_card1
     dealer_face_card2 = (random_card4.rank == 'J' || random_card4.rank == 'Q' || random_card4.rank == 'K') ? 10 : random_card4.rank
     @dealer_card2 = (dealer_face_card2 == 'A') ? 1 : dealer_face_card2
-    if @dealer_card1.to_i != @dealer_card2.to_i
+    if random_card3 != random_card && random_card2 && random_card4
         @dealer_total = @dealer_card1.to_i + @dealer_card2.to_i
         puts @dealer_total
         puts
@@ -66,10 +67,9 @@ class Deck
     @user_card1 = (user_face_card1 == 'A') ? 1 : user_face_card1
     user_face_card2 = (random_card2.rank == 'J' || random_card2.rank == 'Q' || random_card2.rank == 'K') ? 10 : random_card2.rank
     @user_card2 = (user_face_card2 == 'A') ? 1 : user_face_card2
-    if @user_card1.to_i != @user_card2.to_i
+    if random_card != random_card2 && random_card3 && random_card4
         @user_total = @user_card1.to_i + @user_card2.to_i
-        puts @user_total
-        puts
+            puts @user_total
     else
         card_deal
     end
@@ -110,11 +110,12 @@ class Deck
   end
 
   def comparison
-    if @new_total || @user_total > @new_dealer_total
+    case
+    when @new_total || @user_total > @new_dealer_total 
         puts "You Win!"
         result_menu
-    elsif @new_total || @user_total < @new_dealer_total
-        puts "You lose"
+    when @new_total || @user_total < @new_dealer_total 
+        puts "You Lose"
         result_menu
     else
         puts "Its a push!"
@@ -134,6 +135,16 @@ class Deck
     end
   end
 
+  def quick_stay
+    case
+    when @user_total > @dealer_total
+        puts 'You Win!'
+    when @user_total < @dealer_total
+        puts 'You Lose!'
+    else
+        puts "Its a push!"
+    end
+  end
 
   def dealer_hit
     if @card_array != []
@@ -146,7 +157,7 @@ class Deck
         else
             dealer_hit
         end
-    else
+    elsif @dealer_total < 17
         hit_card = @shuffle.sample
         puts "Dealer hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
         dealer_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
@@ -156,6 +167,8 @@ class Deck
         else
             dealer_hit
         end
+    else
+        quick_stay
     end
   end
 
