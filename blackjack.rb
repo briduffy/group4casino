@@ -45,6 +45,7 @@ class Deck
     random_card2 = @shuffle.sample
     random_card3 = @shuffle.sample
     random_card4 = @shuffle.sample
+    puts '*********************************************'.colorize(:red)
     puts "Dealer Cards :
     #{random_card3.rank} of #{random_card3.suit} (#{random_card3.color})
     #{random_card4.rank} of #{random_card4.suit} (#{random_card4.color})"
@@ -54,11 +55,14 @@ class Deck
     @dealer_card2 = (dealer_face_card2 == 'A') ? 1 : dealer_face_card2
     if random_card3 != random_card && random_card2 && random_card4
         @dealer_total = @dealer_card1.to_i + @dealer_card2.to_i
+        puts 'Dealers total:'
         puts @dealer_total
         puts
+        puts '*********************************************'.colorize(:red)
     else
         card_deal
     end
+    puts '*********************************************'.colorize(:green)
     puts "Your cards : 
     #{random_card.rank} of #{random_card.suit} (#{random_card.color})
     #{random_card2.rank} of #{random_card2.suit} (#{random_card2.color})"
@@ -69,7 +73,9 @@ class Deck
     @user_card2 = (user_face_card2 == 'A') ? 1 : user_face_card2
     if random_card != random_card2 && random_card3 && random_card4
         @user_total = @user_card1.to_i + @user_card2.to_i
+        puts 'Your total:'
             puts @user_total
+            puts '*********************************************'.colorize(:green)
     else
         card_deal
     end
@@ -85,6 +91,7 @@ class Deck
     puts 'Your total is now:' 
     @new_total = total + @user_total.to_i
     puts @new_total
+    puts '*********************************************'.colorize(:green)
     card_hand_menu
   end
 
@@ -97,10 +104,12 @@ class Deck
     puts 'Dealer total is now:' 
     @new_dealer_total = total2 + @dealer_total.to_i
     puts @new_dealer_total
+    puts '*********************************************'.colorize(:red)
     if @new_dealer_total < 17 
         dealer_hit
     elsif @new_dealer_total <= 21
         puts @new_dealer_total
+        puts '*********************************************'.colorize(:red)
         comparison
     else
         puts "Dealer Bust!"
@@ -125,6 +134,7 @@ class Deck
 
   def user_hit
     hit_card = @shuffle.sample
+    puts '*********************************************'.colorize(:green)
     puts "Your hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
     user_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
     @user_hit_card = (user_hit1 == 'A') ? 1 : user_hit1
@@ -137,9 +147,9 @@ class Deck
 
   def quick_stay
     case
-    when @user_total > @dealer_total
+    when @user_total || @new_total > @dealer_total
         puts 'You Win!'
-    when @user_total < @dealer_total
+    when @user_total || @new_total < @dealer_total
         puts 'You Lose!'
     else
         puts "Its a push!"
@@ -147,7 +157,8 @@ class Deck
   end
 
   def dealer_hit
-    if @card_array != []
+    case
+    when @card_array != [] && @dealer_total < 17
         hit_card = @shuffle.sample
         puts "Dealer hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
         dealer_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
@@ -157,8 +168,9 @@ class Deck
         else
             dealer_hit
         end
-    elsif @dealer_total < 17
+    when @dealer_total < 17
         hit_card = @shuffle.sample
+        puts '*********************************************'.colorize(:red)
         puts "Dealer hit card #{hit_card.rank} #{hit_card.suit} #{hit_card.color}"
         dealer_hit1 = (hit_card.rank == 'J' || hit_card.rank == 'Q' || hit_card.rank == 'K') ? 10 : hit_card.rank
         @dealer_hit_card = (dealer_hit1 == 'A') ? 1 : dealer_hit1
@@ -182,7 +194,6 @@ class Deck
         when 1 
             user_hit
         when 2
-            puts 'You stayed'
             dealer_hit
         else
             puts 'Invalid Choice'
@@ -204,7 +215,6 @@ class Deck
     choice = gets.to_i
     case choice
     when 1
-        puts "You hit"
         user_hit
     when 2
         dealer_hit
@@ -227,18 +237,18 @@ def result_menu
 end
 
 
-  def results
-    if @dealer_total > @user_total
-        puts "Sorry you lose!"
-    elsif @dealer_total == @user_total
-        puts "It is a draw"
-    else
-        puts "You win!"
-    end
-  end
+#   def results
+#     if @dealer_total > @user_total
+#         puts "Sorry you lose!"
+#     elsif @dealer_total == @user_total
+#         puts "It is a draw"
+#     else
+#         puts "You win!"
+#     end
+#   end
 
 end
 
-d = Deck.new
+# d = Deck.new
 #puts d.results
 #puts d.cards

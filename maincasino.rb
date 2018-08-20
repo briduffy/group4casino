@@ -1,4 +1,4 @@
-require_relative 'slotmachine'
+
 
 def menu
   puts "What would you like to play?"
